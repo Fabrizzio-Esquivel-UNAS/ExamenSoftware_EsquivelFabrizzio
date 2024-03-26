@@ -1,0 +1,57 @@
+@startuml examen
+
+class User {
+    -id : Int
+    -name : String
+    -surname : String
+    -email : String
+    -password : String
+    -phone_number : String
+}
+
+class Review {
+    -id : Int
+    -user_id : Int
+    -book_id : Int
+    -score : Int
+    -content : LongText
+}
+
+class Book {
+    -id : Int
+    -author_id : Int
+    -title : String
+    -year : String
+}
+
+class Author {
+    -id : Int
+    -name : String
+    -surname : String
+}
+
+class Category {
+    -id : Int
+    -name : String
+}
+
+class BookCategory {
+    -book_id : Int
+    -category_id :Int
+}
+
+class UserBook {
+    -user_id : Int
+    -book_id : Int
+}
+
+User "1..*" -- "1..*" Book
+(User,Book) . UserBook
+Book "1..*" -- "1..*" Category
+(Book,Category) . BookCategory
+Author "1" -- "1..*" Book
+
+Review "1..*" -- "1" User
+Review "0..*" -- "1" Book
+
+@enduml
